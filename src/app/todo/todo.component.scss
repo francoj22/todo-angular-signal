@@ -11,7 +11,7 @@
 }
 
 .todo-page {
-  min-height: 100dvh;
+  min-height: 90dvh;
   padding: 2rem 1rem;
   display: grid;
   place-items: center;
@@ -26,17 +26,21 @@
   padding: 1.5rem;
 }
 
+h1 {
+  margin: 0;
+  font-size: 80px;
+  font-weight: 200;
+  color: #b83f45;
+  line-height: 1.05;
+  text-align:center;
+  letter-spacing: -0.02em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 .title-area {
   margin-bottom: 1rem;
 
-  h1 {
-    margin: 0;
-    font-size: 3rem;
-    line-height: 1.05;
-    text-align:center;
-    letter-spacing: -0.02em;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
+
 }
 
 .subtitle {

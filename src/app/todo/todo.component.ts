@@ -2,6 +2,7 @@ import { Component, computed, effect, signal } from '@angular/core';
 
 import { TodoListComponent } from '../todo-list/todo-list.component';
 import { Todo, TodoFilter } from './todo.model';
+import { TODO_SEEDS } from '../constants/todo-seeds';
 
 @Component({
   selector: 'app-todo',
@@ -13,28 +14,7 @@ import { Todo, TodoFilter } from './todo.model';
 export class TodoComponent {
   private static readonly TODOS_STORAGE_KEY = 'signal-todo-items';
 
-  private readonly seedTodos: Todo[] = [
-    {
-      id: 1,
-      text: 'Do planning: define sprint scope, owners, and delivery dates.',
-      completed: false,
-    },
-    {
-      id: 2,
-      text: 'Prepare release notes with features, bug fixes, and migration steps.',
-      completed: false,
-    },
-    {
-      id: 3,
-      text: 'Complete release checklist: QA sign-off, version bump, and deployment window.',
-      completed: false,
-    },
-    {
-      id: 4,
-      text: 'Set up post-release monitoring and rollback plan.',
-      completed: true,
-    },
-  ];
+  private readonly seedTodos: Todo[] = TODO_SEEDS
 
   private nextId = this.seedTodos.length + 1;
 
