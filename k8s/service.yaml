@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-angular-signal
+  labels:
+    app: todo-angular-signal
+spec:
+  type: ClusterIP
+  selector:
+    app: todo-angular-signal
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80

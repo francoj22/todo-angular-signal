@@ -1,0 +1,6 @@
+apiVersion: v2
+name: todo-angular-signal
+description: Helm chart for the todo-angular-signal Angular app
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

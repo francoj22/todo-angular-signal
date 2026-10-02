@@ -3,6 +3,7 @@ import { Component, computed, effect, signal } from '@angular/core';
 import { TodoListComponent } from '../todo-list/todo-list.component';
 import { Todo, TodoFilter } from './todo.model';
 import { TODO_SEEDS } from '../constants/todo-seeds';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-todo',
@@ -14,9 +15,12 @@ import { TODO_SEEDS } from '../constants/todo-seeds';
 export class TodoComponent {
   private static readonly TODOS_STORAGE_KEY = 'signal-todo-items';
 
-  private readonly seedTodos: Todo[] = TODO_SEEDS
+  private readonly seedTodos: Todo[] = TODO_SEEDS.map(todo => ({
+    ...todo,
+    id: String(todo.id)
+  }))
 
-  private nextId = this.seedTodos.length + 1;
+  private readonly nextId = this.seedTodos.length + 1;
 
   protected readonly title = 'Signal Todo';
   protected readonly draft = signal('');
@@ -27,8 +31,8 @@ export class TodoComponent {
     const storedTodos = this.readTodosFromStorage();
 
     if (storedTodos) {
-      this.todos.set(storedTodos);
-      this.nextId = storedTodos.reduce((maxId, todo) => Math.max(maxId, todo.id), 0) + 1;
+      this.todos.update(() => storedTodos);
+      this.nextId = storedTodos.reduce((maxId, todo) => Math.max(Number(maxId), Number(todo.id)), 0) + 1;
     }
 
     effect(() => {
@@ -66,25 +70,22 @@ export class TodoComponent {
   }
 
   protected addTodo(): void {
-    const text = this.draft().trim();
+    const text= this.draft().trim();
 
-    if (!text) {
+    if(!text) {
       return;
     }
-
     this.todos.update((items) => [
       {
-        id: this.nextId++,
+        id: uuidv4().substring(0,8),
         text,
-        completed: false,
+        completed: false
       },
-      ...items,
+      ...items
     ]);
-
-    this.draft.set('');
   }
 
-  protected toggleTodo(id: number): void {
+  protected toggleTodo(id: string): void {
     this.todos.update((items) =>
       items.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo,
@@ -92,7 +93,7 @@ export class TodoComponent {
     );
   }
 
-  protected deleteTodo(id: number): void {
+  protected deleteTodo(id: string): void {
     this.todos.update((items) => items.filter((todo) => todo.id !== id));
   }
 
@@ -122,7 +123,7 @@ export class TodoComponent {
         return (
           typeof item === 'object' &&
           item !== null &&
-          typeof item.id === 'number' &&
+          typeof item.id === 'string' &&
           typeof item.text === 'string' &&
           typeof item.completed === 'boolean'
         );

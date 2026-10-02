@@ -1,0 +1,11 @@
+1. Get the release status:
+   helm status {{ .Release.Name }}
+
+2. Get service details:
+   kubectl get svc -n {{ .Release.Namespace }} {{ include "todo-angular-signal.fullname" . }}
+
+3. Port-forward locally:
+   kubectl port-forward -n {{ .Release.Namespace }} svc/{{ include "todo-angular-signal.fullname" . }} 8080:{{ .Values.service.port }}
+
+4. Then open:
+   http://127.0.0.1:8080

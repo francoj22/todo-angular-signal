@@ -12,14 +12,14 @@ import { Todo } from '../todo/todo.model';
 export class TodoListComponent {
   readonly todos = input.required<Todo[]>();
 
-  readonly toggleTodo = output<number>();
-  readonly remove = output<number>();
+  readonly toggleTodo = output<string>();
+  readonly remove = output<string>();
 
-  protected onToggle(id: number): void {
+  protected onToggle(id: string): void {
     this.toggleTodo.emit(id);
   }
 
-  protected onRemove(id: number): void {
+  protected onRemove(id: string): void {
     this.remove.emit(id);
   }
 }
