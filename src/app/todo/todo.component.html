@@ -1,0 +1,44 @@
+<main class="todo-page">
+  <section class="todo-card" aria-label="Todo app with Angular signals">
+    <header class="title-area">
+      <h1>{{ title }}</h1>
+      <p class="subtitle">Fast local state with computed views and zero boilerplate stores.</p>
+    </header>
+
+    <div class="composer">
+      <input
+        type="text"
+        [value]="draft()"
+        (input)="onDraftInput($event)"
+        (keydown.enter)="addTodo()"
+        placeholder="Write a task and press Enter"
+        aria-label="New todo"
+      />
+      <button type="button" (click)="addTodo()">Add</button>
+    </div>
+
+    <div class="toolbar">
+      <p>{{ remainingCount() }} left · {{ completedCount() }} done</p>
+      <fieldset class="filters">
+        <legend class="sr-only">Filter todos</legend>
+        <button type="button" [class.active]="filter() === 'all'" (click)="setFilter('all')">All</button>
+        <button type="button" [class.active]="filter() === 'active'" (click)="setFilter('active')">Active</button>
+        <button type="button" [class.active]="filter() === 'completed'" (click)="setFilter('completed')">Completed</button>
+      </fieldset>
+      <button
+        class="ghost"
+        type="button"
+        (click)="clearCompleted()"
+        [disabled]="completedCount() === 0"
+      >
+        Clear completed
+      </button>
+    </div>
+
+    <app-todo-list
+      [todos]="filteredTodos()"
+      (toggleTodo)="toggleTodo($event)"
+      (remove)="deleteTodo($event)"
+    />
+  </section>
+</main>

@@ -2,11 +2,12 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
-    "todo-angular-ngrx-v1": {
+    "todo-angular-signal": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -61,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "todo-angular-ngrx-v1:build:production"
+              "buildTarget": "todo-angular-signal:build:production"
             },
             "development": {
-              "buildTarget": "todo-angular-ngrx-v1:build:development"
+              "buildTarget": "todo-angular-signal:build:development"
             }
           },
           "defaultConfiguration": "development"

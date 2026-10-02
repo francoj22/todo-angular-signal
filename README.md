@@ -1,59 +1,92 @@
-# TodoAngularNgrxV1
+# Todo App With Angular Signals
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.24.
+This project is a Todo app built with Angular standalone components and Signals-based state management.
 
-## Development server
+It intentionally uses Angular Signals instead of NgRx to keep local UI state simple, readable, and lightweight.
 
-To start a local development server, run:
+## Why Signals Instead Of NgRx
+
+This app manages only local feature state (todos, filter, input text), so Signals are a better fit than a global store.
+
+### Signals benefits in this project
+
+- Less boilerplate: no actions, reducers, effects, selectors, or store setup.
+- State and updates live close to the component that owns them.
+- Computed values are straightforward with computed signals.
+- Easier onboarding for small-to-medium feature scope.
+
+### When NgRx would be a better choice
+
+- Very large applications with many domains and shared global state.
+- Complex side effects and orchestration across multiple features.
+- Need for advanced tooling around action timelines and strict event-driven architecture.
+
+## Architecture
+
+- Root shell: app component
+- Feature container: todo component (state, filtering, mutations)
+- Presentational list: todo-list component (rendering + events)
+
+## State Model
+
+Todos are modeled as:
+
+- id: number
+- text: string
+- completed: boolean
+
+State is stored in Signals:
+
+- todos
+- draft
+- filter
+
+Derived state uses computed signals:
+
+- filteredTodos
+- remainingCount
+- completedCount
+
+## Persistence
+
+The todo list is persisted in localStorage.
+
+On startup, the app hydrates from localStorage if data exists.
+On every state change, todos are saved again.
+
+## Run The Project
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start development server:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Open:
 
-## Code scaffolding
+http://localhost:4200/
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Build for production:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Run tests:
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+## Future Enhancements
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Persist filter and draft input in localStorage.
+- Add due dates and priorities.
+- Add edit-in-place for existing todos.
+- Add backend sync if multi-device support is needed.
