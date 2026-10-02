@@ -1,0 +1,90 @@
+:host {
+  display: block;
+}
+
+.formRoot {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+}
+
+h2 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+.forms-card {
+  width: min(720px, 100%);
+  background: #fff;
+  border: 1px solid #d6dde5;
+  border-radius: 5px;
+  padding: 1.5rem;
+
+  h2,
+  h3 {
+    margin-top: 0;
+    color: #18324a;
+  }
+}
+
+.intro {
+  color: #5e7185;
+}
+
+.release-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.release-form label {
+  display: grid;
+  gap: 0.4rem;
+}
+
+
+
+.release-form span {
+  font-weight: 200;
+}
+
+
+
+.release-form input,
+.release-form textarea {
+  width: 100%;
+  border: 1px solid #c7d4e0;
+  border-radius: 5px;
+  padding: 0.75rem 0.9rem;
+  font: inherit;
+  resize: none;
+}
+
+.release-form button {
+  justify-self: start;
+  border: 0;
+  border-radius: 5px;
+  padding: 0.8rem 1rem;
+  background: #1e5b92;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.release-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error {
+  margin: -0.5rem 0 0;
+  color: #b42318;
+  font-size: 0.92rem;
+}
+
+.preview {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}

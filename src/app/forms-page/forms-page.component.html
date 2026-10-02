@@ -1,0 +1,52 @@
+<section class="formRoot">
+  <div class="forms-card">
+    <h2>Release Form</h2>
+
+    <form class="release-form" (submit)="submitForm($event)" novalidate>
+      <label>
+        <span>Release name</span>
+        <input [formField]="form.releaseName" />
+      </label>
+      @if (form.releaseName().invalid() && (form.releaseName().touched() || form.releaseName().dirty())) {
+        <p class="error">
+          @for (error of form.releaseName().errors(); track error.kind) {
+            <span>{{ error.message }}</span>
+          }
+        </p>
+      }
+
+      <label>
+        <span>Owner</span>
+        <input [formField]="form.owner" />
+      </label>
+      @if (form.owner().invalid() && (form.owner().touched() || form.owner().dirty())) {
+        <p class="error">
+          @for (error of form.owner().errors(); track error.kind) {
+            <span>{{ error.message }}</span>
+          }
+        </p>
+      }
+
+      <label>
+        <span>Release notes</span>
+        <textarea [formField]="form.notes" rows="5" resize="none"></textarea>
+      </label>
+      @if (form.notes().invalid() && (form.notes().touched() || form.notes().dirty())) {
+        <p class="error">
+          @for (error of form.notes().errors(); track error.kind) {
+            <span>{{ error.message }}</span>
+          }
+        </p>
+      }
+
+      <button type="submit" [disabled]="!canSubmit()">
+        @if (isSubmitting()) {
+          Creating...
+        } @else {
+          Create release
+        }
+      </button>
+    </form>
+   
+  </div>
+</section>
